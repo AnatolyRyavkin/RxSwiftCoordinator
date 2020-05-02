@@ -34,3 +34,18 @@ extension Reactive where Base == UIViewController{
     }
 
 }
+
+extension UIView{
+    func findCell() -> UITableViewCell?{
+        if self.subviews.count > 0{
+            for subView in self.subviews{
+                if subView is UITableViewCell{
+                    return subView as? UITableViewCell
+                }else{
+                    return subView.findCell()
+                }
+            }
+        }
+        return nil
+    }
+}

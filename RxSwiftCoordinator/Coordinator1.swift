@@ -14,14 +14,6 @@ import UIKit
 
 class Coordinator1: CoordinatorProtocol{
 
-
-
-
-
-    typealias CoordinatorNext = Coordinator11
-    typealias ElementForObservableStart = Void
-    typealias ElementForObservableCoordinate = IndexPath
-
     var arrayCoordinators: Array<Any>?
 
     var coordinator11: Coordinator11!
@@ -70,25 +62,20 @@ class Coordinator1: CoordinatorProtocol{
         print("deinit Coordinator1")
     }
 
-    func start(from viewController: UIViewController) -> Any {
+    func start(from viewController: UIViewController) -> Observable<Void> {
 
         if self.disposableObsAlert == nil {
             self.coordinator11 = Coordinator11.SharedInit(publishSubject: self.modelView1.publishSubjectSelectedRow)
-            self.disposableObsAlert = (self.coordinate(to: self.coordinator11, from: self.tvc_View) as! Observable<Any>).subscribe{ _ in }
+            self.disposableObsAlert = self.coordinate(to: self.coordinator11, from: self.tvc_View).subscribe{ _ in }
         }
         nc.pushViewController(self.tvc_View, animated: true)
 
-        return Observable<Any>.never() as Any
+        return Observable.empty()
     }
 
-//    func coordinate(to coordinator: CoordinatorNext, from viewController: UIViewController) -> Any {
-//        coordinator11StartDisposable = coordinator11.start(from: viewController).subscribe{ _ in }
-//        return Observable<Any>.empty() as Any
-//    }
-
-    func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Any where Coordinator : CoordinatorProtocol {
+    func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Observable<Void> where Coordinator : CoordinatorProtocol {
         coordinator11StartDisposable = coordinator11.start(from: viewController).subscribe{ _ in }
-        return Observable<Any>.empty() as Any
+        return Observable.empty()
     }
 
 }

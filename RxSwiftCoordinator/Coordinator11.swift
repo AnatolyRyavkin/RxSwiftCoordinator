@@ -13,11 +13,8 @@ import UIKit
 
 class Coordinator11: CoordinatorProtocol{
 
-    typealias CoordinatorNext = Coordinator11
-    typealias Element = Void
-
-    var arrayCoordinators: Array<Coordinator11>?
-
+    var arrayCoordinators: Array<Any>?
+    
     private let disposeBag = DisposeBag()
     private var viewController: View_ViewController!
     private var observerForAllert: AnyObserver<IndexPath>!
@@ -33,7 +30,7 @@ class Coordinator11: CoordinatorProtocol{
                    print("AppCoordinatorObser is empty, execute SharedInit !!!")
                    fatalError()
                #else
-                   _ = Coordinator2.SharedInit(indexPath: IndexPath())
+                   _ = Coordinator11.SharedInit(indexPath: IndexPath())
                #endif
            }
            return Coordinator11.instance!
@@ -74,13 +71,11 @@ class Coordinator11: CoordinatorProtocol{
         print("init Coordinator11")
     }
 
-
     deinit {
         print("deinit Coordinator11")
     }
 
-    func start(from viewController: UIViewController) -> Observable<Element> {
-
+    func start(from viewController: UIViewController) -> Observable<Void> {
         self.viewController = viewController as? View_ViewController
         if self.viewController == nil{
             print("My Fatal Error")
@@ -91,8 +86,8 @@ class Coordinator11: CoordinatorProtocol{
         return Observable.empty()
     }
 
-    public func coordinate(to coordinator: CoordinatorNext , from viewController: UIViewController) -> Observable<Void> {
-        return coordinator.start(from: viewController)
+    func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Observable<Void> where Coordinator : CoordinatorProtocol {
+        return coordinator.start(from: viewController) as! Observable<Void>
     }
     
 }

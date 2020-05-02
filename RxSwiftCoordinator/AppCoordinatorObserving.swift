@@ -10,27 +10,9 @@ import Foundation
 import RxSwift
 import UIKit
 
- protocol CoordinatorProtocol {
-//    associatedtype ElementForObservableStart
-//    associatedtype ElementForObservableCoordinate
-//    typealias ObservableStartType = Observable<ElementForObservableStart>
-//    typealias ObservableCoordinateType = Observable<ElementForObservableCoordinate>
-//    associatedtype CoordinatorNext: CoordinatorProtocol
-
-    var arrayCoordinators: Array<Any>? { get set }
-
-    func start(from viewController: UIViewController) -> Any
-
-    func coordinate< Coordinator: CoordinatorProtocol>(to coordinator: Coordinator, from viewController: UIViewController)  -> Any
-}
-
 class AppCoordinatorObser: CoordinatorProtocol {
 
     var arrayCoordinators: Array<Any>?
-    
-//    typealias CoordinatorNext = Coordinator1
-//    typealias ElementForObservableStart = Void
-//    typealias ElementForObservableCoordinate = Void
 
     //MARK: Singleton begin
 
@@ -58,6 +40,7 @@ class AppCoordinatorObser: CoordinatorProtocol {
     //MARK: Singleton end
 
     var coordinator1: Coordinator1!
+    var coordinator2: Coordinator2!
     private let disposeBag = DisposeBag()
     var nc: UINavigationController
     var sourseViewController: UIViewController
@@ -72,28 +55,32 @@ class AppCoordinatorObser: CoordinatorProtocol {
         print("deinit CoordinatorApp")
     }
 
-    func start(from viewController: UIViewController) -> Any {
+    func start(from viewController: UIViewController) -> Observable<Void> {
 
         viewController.rx.viewDidAppear.subscribe(onNext:  {  _ in
-            if arc4random_uniform(10) >= 1 {
+            if arc4random_uniform(10) >= 10 {
                 self.coordinator1 = Coordinator1.SharedInit(nc: self.nc)
                 if self.arrayCoordinators == nil{
                     self.arrayCoordinators = [Any]()
                 }
                 self.arrayCoordinators!.append(self.coordinator1 as Any)
-                (self.coordinate(to: self.coordinator1, from: viewController) as! Observable<Void>).subscribe{ _ in}.disposed(by: self.disposeBag)
+                self.coordinate(to: self.coordinator1, from: viewController).subscribe{ _ in}.disposed(by: self.disposeBag)
                 return
             }else{
-                //self.coordinate(to: self.anothercoordinator, from: viewController).subscribe{ _ in}.disposed(by: self.disposeBag)
-                print("zero !!!")
+                self.coordinator2 = Coordinator2.SharedInit(nc: self.nc)
+                if self.arrayCoordinators == nil{
+                    self.arrayCoordinators = [Any]()
+                }
+                self.arrayCoordinators!.append(self.coordinator2 as Any)
+                self.coordinate(to: self.coordinator2, from: viewController).subscribe{ _ in}.disposed(by: self.disposeBag)
                 return
             }
         }).disposed(by: disposeBag)
-        return  Observable<Any>.never() as Any
+        return  Observable<Void>.empty()
     }
 
-    func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Any where Coordinator : CoordinatorProtocol {
-        return coordinator.start(from: viewController)
+    func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Observable<Void> where Coordinator : CoordinatorProtocol {
+        return coordinator.start(from: viewController) as! Observable<Void>
     }
 
 }

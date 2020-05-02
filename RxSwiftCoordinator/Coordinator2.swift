@@ -14,11 +14,7 @@ import UIKit
 
 class Coordinator2: CoordinatorProtocol{
 
-    typealias CoordinatorNext = Coordinator21
-    typealias ElementForObservableStart = Void
-    typealias ElementForObservableCoordinate = IndexPath
-
-    var arrayCoordinators: Array<Coordinator21>?
+    var arrayCoordinators: Array<Any>?
 
     var coordinator21: Coordinator21!
     private let disposeBag = DisposeBag()
@@ -26,7 +22,7 @@ class Coordinator2: CoordinatorProtocol{
     private var coordinator21StartDisposable: Disposable!
     var nc: UINavigationController
     var tvc_View: View_ViewController
-    var modelView1: ModelView1!
+    var modelView2: ModelView2!
     var subscriberModelViewPublshSubject: Disposable!
 
     //MARK: Singleton begin
@@ -57,8 +53,8 @@ class Coordinator2: CoordinatorProtocol{
     private init(nc: UINavigationController){
         self.nc = nc
         tvc_View = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "vc") as! View_ViewController
-        modelView1 = ModelView1.SharedInit(viewController: tvc_View)
-        tvc_View.modelView = modelView1
+        modelView2 = ModelView2.SharedInit(viewController: tvc_View)
+        tvc_View.modelView = modelView2
         tvc_View.view.backgroundColor = UIColor.blue
         print("init Coordinator2")
     }
@@ -68,19 +64,17 @@ class Coordinator2: CoordinatorProtocol{
 
     func start(from viewController: UIViewController) -> Observable<Void> {
 
-        if self.disposableObsAlert == nil {
-            self.coordinator21 = Coordinator21.SharedInit(publishSubject: self.modelView1.publishSubjectSelectedRow)
-            self.disposableObsAlert = self.coordinate(to: self.coordinator21, from: self.tvc_View).subscribe{ _ in }
-        }
+//        if self.disposableObsAlert == nil {
+//            self.coordinator21 = Coordinator21.SharedInit(publishSubject: self.modelView2.publishSubjectSelectedRow)
+//            self.disposableObsAlert = self.coordinate(to: self.coordinator21, from: self.tvc_View).subscribe{ _ in }
+//        }
         nc.pushViewController(self.tvc_View, animated: true)
-
-        return Observable.never()
+        return Observable.empty()
     }
 
-    func coordinate(to coordinator: CoordinatorNext, from viewController: UIViewController) -> Observable<IndexPath> {
+    func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Observable<Void> where Coordinator : CoordinatorProtocol {
         coordinator21StartDisposable = coordinator21.start(from: viewController).subscribe{ _ in }
         return Observable.empty()
     }
 
 }
-

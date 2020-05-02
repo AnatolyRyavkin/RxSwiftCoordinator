@@ -35,8 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let nc = UINavigationController.init(rootViewController: vc)
         window?.rootViewController = nc
         coordinatorAppObser = AppCoordinatorObser.SharedInit(nc: nc, sourseViewController: vc)
-        coordinatorAppObser!.start(from: vc).subscribe(onNext: {
-            print("launch")
+        coordinatorAppObser!.start(from: vc).subscribe({ _ in 
+            //print("launch")
         }).disposed(by: disposeBag)
         window?.makeKeyAndVisible()
         guard let _ = (scene as? UIWindowScene) else {

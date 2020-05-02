@@ -11,14 +11,11 @@ import RxSwift
 import RxCocoa
 import Foundation
 
-protocol ProtocolObservableViewController {
-
-}
 
 class View_ViewController: UIViewController, ProtocolObservableViewController{
 
     private let disposeBag = DisposeBag()
-    var modelView: ModelView1!
+    var modelView: ModelView!
 
     @IBOutlet weak var tableView: UITableView!
 

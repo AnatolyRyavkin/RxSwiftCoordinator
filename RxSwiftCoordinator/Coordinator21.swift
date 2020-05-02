@@ -11,12 +11,14 @@ import RxSwift
 import RxCocoa
 import UIKit
 
+import Foundation
+import RxSwift
+import RxCocoa
+import UIKit
+
 class Coordinator21: CoordinatorProtocol{
 
-    typealias CoordinatorNext = Coordinator21
-    typealias Element = Void
-
-    var arrayCoordinators: Array<Coordinator21>?
+    var arrayCoordinators: Array<Any>?
 
     private let disposeBag = DisposeBag()
     private var viewController: View_ViewController!
@@ -74,13 +76,11 @@ class Coordinator21: CoordinatorProtocol{
         print("init Coordinator21")
     }
 
-
     deinit {
         print("deinit Coordinator21")
     }
 
-    func start(from viewController: UIViewController) -> Observable<Element> {
-
+    func start(from viewController: UIViewController) -> Observable<Void> {
         self.viewController = viewController as? View_ViewController
         if self.viewController == nil{
             print("My Fatal Error")
@@ -91,9 +91,10 @@ class Coordinator21: CoordinatorProtocol{
         return Observable.empty()
     }
 
-    public func coordinate(to coordinator: CoordinatorNext , from viewController: UIViewController) -> Observable<Void> {
-        return coordinator.start(from: viewController)
+    func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Observable<Void> where Coordinator : CoordinatorProtocol {
+        return coordinator.start(from: viewController) as! Observable<Void>
     }
 
 }
+
 

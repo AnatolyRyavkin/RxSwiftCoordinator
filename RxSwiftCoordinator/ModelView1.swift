@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class ModelView1{
+class ModelView1: ModelView{
 
     let disposeBag = DisposeBag()
 
@@ -62,6 +62,7 @@ class ModelView1{
     deinit {
         print("deinit ModelVeiw1")
     }
+
     func binding(){
         
         self.tableView = self.viewControllerWithTableView.tableView
