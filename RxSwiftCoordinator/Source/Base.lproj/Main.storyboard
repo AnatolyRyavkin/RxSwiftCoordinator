@@ -43,13 +43,25 @@
                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Ej5-dX-zsc">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="pbb-0e-76D"/>
+                            <barButtonItem systemItem="edit" id="ntJ-0n-B5d"/>
+                            <barButtonItem title="AddItems" id="s4O-hP-YKg"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="barButtonAddItem" destination="s4O-hP-YKg" id="k0W-OY-lQa"/>
+                        <outlet property="barButtonAddSection" destination="pbb-0e-76D" id="Uwu-ce-b8R"/>
+                        <outlet property="barButtonEditTableView" destination="ntJ-0n-B5d" id="N2w-0T-B0r"/>
                         <outlet property="tableView" destination="ojb-G4-lmp" id="bJc-Na-qrT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="136.60714285714286"/>
+            <point key="canvasLocation" x="572" y="124"/>
         </scene>
     </scenes>
 </document>

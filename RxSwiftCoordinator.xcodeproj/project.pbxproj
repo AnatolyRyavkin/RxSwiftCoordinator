@@ -78,8 +78,8 @@
 		FD4EBB2E245C6D5E001B3A96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FD992EEE24580F59000B8790 /* Model1.swift */,
 				FD4EBB33245CA192001B3A96 /* Model2 */,
+				FD992EEE24580F59000B8790 /* Model1.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -134,11 +134,12 @@
 		FD7BE12624598C8F00A84D97 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FD7E324B24577AFA0006BFCA /* ViewController.swift */,
 				FD7E325024577B160006BFCA /* Assets.xcassets */,
 				FD7E325224577B160006BFCA /* LaunchScreen.storyboard */,
+				FD7E324D24577AFA0006BFCA /* Main.storyboard */,
 				FD7E324724577AFA0006BFCA /* AppDelegate.swift */,
 				FD7E324924577AFA0006BFCA /* SceneDelegate.swift */,
+				FD7E324B24577AFA0006BFCA /* ViewController.swift */,
 				FD7BE11A2459541800A84D97 /* Extensions.swift */,
 				FD4EBB3E245D7911001B3A96 /* Protocols.swift */,
 			);
@@ -164,13 +165,12 @@
 		FD7E324624577AFA0006BFCA /* RxSwiftCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				FD7E325524577B160006BFCA /* Info.plist */,
 				FD7BE12624598C8F00A84D97 /* Source */,
 				FD7BE1202459598900A84D97 /* Coordinators */,
 				FD4EBB3B245D7873001B3A96 /* View */,
 				FD4EBB2F245C6D7C001B3A96 /* ViewModels */,
 				FD4EBB2E245C6D5E001B3A96 /* Models */,
-				FD7E325524577B160006BFCA /* Info.plist */,
-				FD7E324D24577AFA0006BFCA /* Main.storyboard */,
 			);
 			path = RxSwiftCoordinator;
 			sourceTree = "<group>";

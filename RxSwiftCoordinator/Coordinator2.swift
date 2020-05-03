@@ -64,10 +64,10 @@ class Coordinator2: CoordinatorProtocol{
 
     func start(from viewController: UIViewController) -> Observable<Void> {
 
-//        if self.disposableObsAlert == nil {
-//            self.coordinator21 = Coordinator21.SharedInit(publishSubject: self.modelView2.publishSubjectSelectedRow)
-//            self.disposableObsAlert = self.coordinate(to: self.coordinator21, from: self.tvc_View).subscribe{ _ in }
-//        }
+        if self.disposableObsAlert == nil {
+            self.coordinator21 = Coordinator21.SharedInit(publishSubject: self.modelView2.model2.itemSelectedPublishSubject)
+            self.disposableObsAlert = self.coordinate(to: self.coordinator21, from: self.tvc_View).subscribe{ _ in }
+        }
         nc.pushViewController(self.tvc_View, animated: true)
         return Observable.empty()
     }

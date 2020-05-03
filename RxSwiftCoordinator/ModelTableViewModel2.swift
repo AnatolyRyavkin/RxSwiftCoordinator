@@ -44,12 +44,10 @@ class ModelTableViewModel2: RxTableViewSectionedReloadDataSource<DataSourceDecem
         }
 
         let sectionForSectionIndexTitle: ModelTableViewModel2.SectionForSectionIndexTitle = { (dataSource, string, index) -> Int in
-            //return dataSource[index].identity
-            //move at SectionIndex to return ... section identity, string - name section from array sectionIndexTitles
+            /// return dataSource[index].identity
+            /// move at SectionIndex to return ... section identity, string - name section from array sectionIndexTitles
             return index
         }
-
-
 
         let cell = ModelTableViewModel2.init(configureCell: configureCell,
                                              titleForHeaderInSection: configureHeaderSection,
@@ -63,7 +61,5 @@ class ModelTableViewModel2: RxTableViewSectionedReloadDataSource<DataSourceDecem
         return cell
 
     }()
-
-    
 
 }

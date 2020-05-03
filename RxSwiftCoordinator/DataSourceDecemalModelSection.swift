@@ -37,4 +37,46 @@ extension DataSourceDecemalModelSection: AnimatableSectionModelType{
         self = original
         decade = items
     }
+
+//MARK Change
+
+    mutating func changeMultipleElementAtIndexPath(indexPath: IndexPath, newElement: Int?) { //}-> DataSourceDecemalModelSection{
+        if let num = newElement{
+            self.decade.remove(at: indexPath.row)
+            self.decade.insert(num, at: indexPath.row)
+        }else{
+            let element = self.decade.remove(at: indexPath.row)  //(self.decade.remove(at: indexPath.row)) * (self.numberDecade * 10 + indexPath.row)
+            self.decade.insert(element * element, at: indexPath.row)
+        }
+        //return self
+    }
+
+    mutating func insertElementToIndexPath(indexPath: IndexPath, newElement: Int?) { //-> DataSourceDecemalModelSection{
+        if let num = newElement{
+            if indexPath.row < self.decade.count{
+                self.decade.insert(num, at: indexPath.row)
+            }else{
+                self.decade.append(num)
+            }
+        }else{
+            let oldNum = self.decade[indexPath.row]
+            if indexPath.row < self.decade.count{
+                self.decade.insert(oldNum, at: indexPath.row)
+            }else{
+                self.decade.append(oldNum)
+            }
+        }
+        //return self
+    }
+
+    mutating func deleteElementToIndexPath(indexPath: IndexPath) -> Int{
+        let num = self.decade.remove(at: indexPath.row)
+        return num
+    }
+
+
 }
+
+
+
+

@@ -14,7 +14,7 @@ protocol ModelView {
     func binding() 
 }
 
-protocol ProtocolObservableViewController {
+protocol ProtocolExistTableView {
     var tableView: UITableView! { get set }
 }
 

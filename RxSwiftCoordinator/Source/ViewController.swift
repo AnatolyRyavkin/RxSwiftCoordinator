@@ -10,22 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let a = 1
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        print("init viewController")
-//    }
-
-//    convenience init(){
-//        self.init()
-//    }
-
     deinit {
         print("deinit ViewController")
     }
-//    convenience init(){
-//        self.init(coder: NSCoder.init())!
-//    }
 
     convenience init() {
         self.init(nibName:nil, bundle:nil)
@@ -40,7 +27,5 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-
-
 }
 

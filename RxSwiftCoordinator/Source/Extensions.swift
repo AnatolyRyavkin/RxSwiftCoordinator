@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
+
 extension Reactive where Base == UIViewController{
 
     private func controlEvent(for selector: Selector) -> ControlEvent<Void> {
@@ -32,7 +33,20 @@ extension Reactive where Base == UIViewController{
     var viewDidDisappear: ControlEvent<Void> {
         return controlEvent(for: #selector(UIViewController.viewDidDisappear))
     }
+}
 
+extension Reactive where Base == UITableView{
+    var edit: Binder<Void>{ Binder.init(self.base) { (tableView, arg)  in
+            tableView.setEditing(!tableView.isEditing, animated: true)
+        }
+    }
+}
+
+extension Reactive where Base == UITableView{
+    var editAddItems: Binder<Void>{ Binder.init(self.base) { (tableView, arg)  in
+            tableView.setEditing(!tableView.isEditing, animated: true)
+        }
+    }
 }
 
 extension UIView{
@@ -49,3 +63,5 @@ extension UIView{
         return nil
     }
 }
+
+

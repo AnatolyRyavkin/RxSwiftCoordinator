@@ -18,15 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
+//MARK- Second variant
 //        if let windowScene = scene as? UIWindowScene {
-//            let window = UIWindow(windowScene: windowScene)
-//            let vc = ViewController()
-//            let nc = UINavigationController.init(rootViewController: vc)
-//            window.rootViewController = nc
-//            self.window = window
-//            window.makeKeyAndVisible()
-//
-//        }
+//        let window = UIWindow(windowScene: windowScene)
+//          ...
+
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow.init()
@@ -36,7 +32,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = nc
         coordinatorAppObser = AppCoordinatorObser.SharedInit(nc: nc, sourseViewController: vc)
         coordinatorAppObser!.start(from: vc).subscribe({ _ in 
-            //print("launch")
         }).disposed(by: disposeBag)
         window?.makeKeyAndVisible()
         guard let _ = (scene as? UIWindowScene) else {

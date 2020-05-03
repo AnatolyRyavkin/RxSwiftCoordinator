@@ -70,7 +70,7 @@ class ModelView1: ModelView{
         (self.viewControllerWithTableView as UIViewController).rx.viewWillAppear.subscribe(onNext: { _ in
 
             self.model1.updateToInitial()
-
+            
             if self.disposableBindingTableView != nil{
                 self.disposableBindingTableView.dispose()
             }

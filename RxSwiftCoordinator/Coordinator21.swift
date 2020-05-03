@@ -94,7 +94,6 @@ class Coordinator21: CoordinatorProtocol{
     func coordinate<Coordinator>(to coordinator: Coordinator, from viewController: UIViewController) -> Observable<Void> where Coordinator : CoordinatorProtocol {
         return coordinator.start(from: viewController) as! Observable<Void>
     }
-
 }
 
 

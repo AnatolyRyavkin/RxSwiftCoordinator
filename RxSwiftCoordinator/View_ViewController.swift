@@ -12,13 +12,16 @@ import RxCocoa
 import Foundation
 
 
-class View_ViewController: UIViewController, ProtocolObservableViewController{
+class View_ViewController: UIViewController, ProtocolExistTableView{
 
     private let disposeBag = DisposeBag()
     var modelView: ModelView!
 
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var barButtonAddSection: UIBarButtonItem!
+    @IBOutlet weak var barButtonEditTableView: UIBarButtonItem!
+    @IBOutlet weak var barButtonAddItem: UIBarButtonItem!
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         print("init View_ViewController")
@@ -29,8 +32,8 @@ class View_ViewController: UIViewController, ProtocolObservableViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //modelView = ModelView1.SharedInit(viewController: self)
         modelView.binding()
     }
-
 }
+
+
